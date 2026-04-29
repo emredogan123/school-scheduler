@@ -3,23 +3,35 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
+const API =
+  process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+  
 export default function Home() {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [conflicts, setConflicts] = useState([]);
 
   const fetchSchedule = async () => {
-    const res = await axios.get("http://localhost:8000/schedule/grid");
-    setData(res.data);
+    try {
+      const res = await axios.get(`${API}/schedule/grid`);
+      setData(res.data);
+    } catch (err) {
+      console.error("Fetch error:", err);
+    }
   };
 
   const generate = async () => {
     setLoading(true);
 
-    const res = await axios.post("http://localhost:8000/schedule/generate");
-    setConflicts(res.data.conflicts || []);
+    try {
+      const res = await axios.post(`${API}/schedule/generate`);
 
-    await fetchSchedule();
+      setConflicts(res.data.conflicts || []);
+
+      await fetchSchedule();
+    } catch (err) {
+      console.error("Generate error:", err);
+    }
 
     setLoading(false);
   };
