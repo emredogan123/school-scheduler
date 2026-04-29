@@ -66,23 +66,25 @@ The scheduling engine follows a constraint-based approach:
 
 ## 📁 Project Structure
 
+```
 school-scheduler/
 │
 ├── backend/
 │   ├── app/
-│   │   ├── api/
+│   │   ├── api/routes/
 │   │   ├── models/
 │   │   ├── schemas/
 │   │   ├── services/
 │   │   ├── scheduler/
 │   │   └── db/
-│   └── requirements.txt
 │
 ├── frontend/
 │   ├── app/
-│   └── public/
+│   ├── public/
+│   └── package.json
 │
 └── README.md
+```
 
 ---
 
@@ -125,7 +127,7 @@ NEXT_PUBLIC_API_URL=https://your-backend.onrender.com
 ## ⚠️ Important Notes
 
 * Render free tier may cause cold start delays (first request can take 10–20 seconds)
-* SQLite is used for simplicity 
+* SQLite is used for simplicity and is not recommended for production-scale applications
 
 ---
 
