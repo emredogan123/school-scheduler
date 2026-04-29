@@ -119,7 +119,7 @@ NEXT_PUBLIC_API_URL=http://localhost:8000
 For production:
 
 ```env
-NEXT_PUBLIC_API_URL=https://your-backend.onrender.com
+NEXT_PUBLIC_API_URL=https://school-scheduler-gvz9.onrender.com
 ```
 
 ---
