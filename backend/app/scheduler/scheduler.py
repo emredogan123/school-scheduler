@@ -31,7 +31,6 @@ def generate_schedule(db):
     result = []
     conflicts = []
 
-    # 🔥 heuristic: zor dersler önce
     def course_difficulty(course):
         teacher = course.teacher
         if not teacher or not teacher.available_slots:

@@ -11,7 +11,6 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app.api.routes import class_group
 
-# MODELLERİ IMPORT ET (çok önemli!)
 from app.models import teacher, classroom, course, timeslot, schedule  # noqa
 
 app = FastAPI()
