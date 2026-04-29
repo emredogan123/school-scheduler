@@ -1,34 +1,42 @@
 # 📅 School Scheduler
 
 A web-based **school timetable generator** that automatically assigns courses to time slots while respecting real-world constraints such as teacher availability, classroom conflicts, and weekly lesson requirements.
-![alt text](image-1.png)
+
 ---
 
 ## 🚀 Features
 
-### ✅ Core Scheduling Constraints
+### ✅ Core Constraints
 - Teachers can only be assigned to their **available time slots**
 - A teacher **cannot teach multiple classes at the same time**
 - A class group **cannot have overlapping lessons**
-- Each course must be scheduled according to its **weekly required hours**
+- Courses are scheduled based on **weekly required hours**
 
 ---
 
-### 🧠 Smart Scheduling Logic
-- Automatically generates schedules using a constraint-aware algorithm
-- Detects and reports **unsatisfied course hours (conflicts)**
-- Supports **multiple classes (full school scheduling)**
+### 🧠 Scheduling Engine
+- Constraint-based scheduling algorithm
+- Handles **multi-class school planning**
+- Detects and reports **conflicts automatically**
 
 ---
 
-### 📊 Interactive UI
-- Clean **grid view grouped by class (10A, 10B, etc.)**
-- Each lesson card shows:
+### 📊 UI Highlights
+- Clean **grid-based timetable view**
+- Organized by class (e.g., 10A, 10B)
+- Each lesson shows:
   - Course name
   - Teacher
   - Class
-- Highlights conflicts clearly
-- One-click **Generate Schedule** button
+- Conflict alerts displayed clearly
+
+---
+
+## 🖼️ Demo
+
+```
+![Demo](image.png)
+```
 
 ---
 
@@ -38,17 +46,18 @@ A web-based **school timetable generator** that automatically assigns courses to
 - FastAPI
 - SQLAlchemy
 - SQLite
-- Custom scheduling algorithm
+- Custom Scheduling Algorithm
 
 ### Frontend
 - Next.js (React)
 - Axios
-- Simple responsive UI
+- Tailwind / Custom Styling
 
 ---
 
 ## 📂 Project Structure
 
+```
 school-scheduler/
 │
 ├── backend/
@@ -61,9 +70,12 @@ school-scheduler/
 │   │   └── db/
 │
 ├── frontend/
-│   └── app/
+│   ├── app/
+│   ├── public/
+│   └── package.json
 │
 └── README.md
+```
 
 ---
 
@@ -72,7 +84,7 @@ school-scheduler/
 ### 1. Clone
 
 ```bash
-git clone https://github.com/your-username/school-scheduler.git
+git clone https://github.com/emredogan123/school-scheduler.git
 cd school-scheduler
 ```
 
@@ -89,7 +101,7 @@ pip install -r requirements.txt
 uvicorn app.main:app --reload
 ```
 
-Swagger:
+Swagger Docs:
 ```
 http://127.0.0.1:8000/docs
 ```
@@ -111,9 +123,9 @@ http://localhost:3000
 
 ---
 
-## 🧪 Example Data
+## 🧪 Example API Usage
 
-### Teacher
+### Create Teacher
 
 ```json
 {
@@ -122,7 +134,9 @@ http://localhost:3000
 }
 ```
 
-### Class
+---
+
+### Create Class
 
 ```json
 {
@@ -130,7 +144,9 @@ http://localhost:3000
 }
 ```
 
-### Course
+---
+
+### Create Course
 
 ```json
 {
@@ -145,12 +161,14 @@ http://localhost:3000
 
 ## 🔄 API Endpoints
 
-POST /teachers/ → create teacher  
-POST /class-groups/ → create class  
-POST /courses/ → create course  
-POST /timeslots/ → create time slot  
-POST /schedule/generate → generate schedule  
-GET  /schedule/grid → get schedule grid  
+| Method | Endpoint | Description |
+|------|--------|------------|
+| POST | `/teachers/` | Create teacher |
+| POST | `/class-groups/` | Create class |
+| POST | `/courses/` | Create course |
+| POST | `/timeslots/` | Create time slot |
+| POST | `/schedule/generate` | Generate schedule |
+| GET  | `/schedule/grid` | Get schedule grid |
 
 ---
 
@@ -168,25 +186,33 @@ GET  /schedule/grid → get schedule grid
 }
 ```
 
-This means the system could not fully schedule the course due to constraints.
-
 ---
 
 ## 🎯 Future Improvements
 
-- Better scheduling algorithm (backtracking / optimization)
-- Teacher-based schedule view
+- Advanced scheduling (backtracking / optimization)
+- Teacher-based timetable view
 - Drag & drop UI
-- Export as PDF / Excel
-- Conflict visualization
+- Export to PDF / Excel
+- Conflict visualization improvements
 
 ---
 
-## 👨‍💻 Notes
+## 👨‍💻 About
 
-This project simulates a real-world school scheduling system with:
-- Constraint satisfaction
-- Backend-heavy logic
-- Interactive frontend
+This project demonstrates:
+- Constraint-based problem solving
+- Backend-heavy architecture
+- Full-stack development (FastAPI + React)
 
 ---
+
+## ⭐ Notes
+
+> node_modules, venv, and build files are excluded via `.gitignore`.
+
+---
+
+## 📌 Author
+
+Developed by **Emre Doğan**
