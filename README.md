@@ -35,7 +35,7 @@ A web-based **school timetable generator** that automatically assigns courses to
 ## 🖼️ Demo
 
 ```
-![Demo](image.png)
+![Demo](./image.png)
 ```
 
 ---
