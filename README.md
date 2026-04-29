@@ -1,114 +1,102 @@
 # 📅 School Scheduler
 
-A web-based **school timetable generator** that automatically assigns courses to time slots while respecting real-world constraints such as teacher availability, classroom conflicts, and weekly lesson requirements.
+A full-stack web application that automatically generates optimized school timetables while respecting real-world constraints such as teacher availability, classroom conflicts, and weekly lesson requirements.
 
 ---
 
-## 🚀 Features
+## 🚀 Live Demo
 
-### ✅ Core Constraints
-- Teachers can only be assigned to their **available time slots**
-- A teacher **cannot teach multiple classes at the same time**
-- A class group **cannot have overlapping lessons**
-- Courses are scheduled based on **weekly required hours**
+🔗 https://school-scheduler-lac.vercel.app
 
 ---
 
-### 🧠 Scheduling Engine
-- Constraint-based scheduling algorithm
-- Handles **multi-class school planning**
-- Detects and reports **conflicts automatically**
+## 📸 Demo
+
+![Application Screenshot](./image.png)
 
 ---
 
-### 📊 UI Highlights
-- Clean **grid-based timetable view**
-- Organized by class (e.g., 10A, 10B)
-- Each lesson shows:
-  - Course name
-  - Teacher
-  - Class
-- Conflict alerts displayed clearly
-
----
-
-## 🖼️ Demo
-
-```
-![Demo](./image.png)
-```
-
----
-
-## 🏗️ Tech Stack
-
-### Backend
-- FastAPI
-- SQLAlchemy
-- SQLite
-- Custom Scheduling Algorithm
+## ⚙️ Tech Stack
 
 ### Frontend
-- Next.js (React)
-- Axios
-- Tailwind / Custom Styling
+
+* Next.js (App Router)
+* React
+* Axios
+* Tailwind CSS (optional)
+
+### Backend
+
+* FastAPI
+* SQLAlchemy
+* SQLite
+
+### Deployment
+
+* Vercel (Frontend)
+* Render (Backend)
 
 ---
 
-## 📂 Project Structure
+## 🧠 Core Features
 
-```
+* Automatic timetable generation
+* Teacher availability constraints
+* Prevention of overlapping lessons
+* Classroom conflict handling
+* Weekly course hour requirements
+* Conflict detection and reporting system
+
+---
+
+## 🧩 Scheduling Logic
+
+The scheduling engine follows a constraint-based approach:
+
+1. Courses are prioritized based on difficulty (limited teacher availability)
+2. Each course is assigned to valid time slots
+3. Constraints enforced:
+
+   * Teacher must be available
+   * Classroom must be available
+   * Class group must not have another lesson at the same time
+4. If no valid slot is found → conflict is recorded
+
+---
+
+## 📁 Project Structure
+
 school-scheduler/
 │
 ├── backend/
 │   ├── app/
-│   │   ├── api/routes/
+│   │   ├── api/
 │   │   ├── models/
 │   │   ├── schemas/
 │   │   ├── services/
 │   │   ├── scheduler/
 │   │   └── db/
+│   └── requirements.txt
 │
 ├── frontend/
 │   ├── app/
-│   ├── public/
-│   └── package.json
+│   └── public/
 │
 └── README.md
-```
 
 ---
 
-## ⚙️ Setup & Run
+## ⚡ Local Setup
 
-### 1. Clone
-
-```bash
-git clone https://github.com/emredogan123/school-scheduler.git
-cd school-scheduler
-```
-
----
-
-### 2. Backend
+### Backend
 
 ```bash
 cd backend
-python -m venv venv
-venv\Scripts\activate
-
 pip install -r requirements.txt
 uvicorn app.main:app --reload
 ```
 
-Swagger Docs:
-```
-http://127.0.0.1:8000/docs
-```
-
----
-
-### 3. Frontend
+### Frontend
 
 ```bash
 cd frontend
@@ -116,103 +104,41 @@ npm install
 npm run dev
 ```
 
-App:
-```
-http://localhost:3000
-```
-
 ---
 
-## 🧪 Example API Usage
+## 🔧 Environment Variables
 
-### Create Teacher
+Create a `.env` file inside the frontend directory:
 
-```json
-{
-  "name": "Ahmet",
-  "available_slots": [1,2,3,4]
-}
+```env
+NEXT_PUBLIC_API_URL=http://localhost:8000
+```
+
+For production:
+
+```env
+NEXT_PUBLIC_API_URL=https://your-backend.onrender.com
 ```
 
 ---
 
-### Create Class
+## ⚠️ Important Notes
 
-```json
-{
-  "name": "10A"
-}
-```
+* Render free tier may cause cold start delays (first request can take 10–20 seconds)
+* SQLite is used for simplicity 
 
 ---
 
-### Create Course
+## 📌 Future Improvements
 
-```json
-{
-  "name": "Physics",
-  "teacher_id": 1,
-  "class_id": 1,
-  "weekly_hours": 2
-}
-```
+* Drag & drop timetable interface
+* Export timetable to PDF / Excel
+* Advanced scheduling algorithm (optimization-based)
+* PostgreSQL integration
+* Authentication & user roles
 
 ---
 
-## 🔄 API Endpoints
+## 👨‍💻 Author
 
-| Method | Endpoint | Description |
-|------|--------|------------|
-| POST | `/teachers/` | Create teacher |
-| POST | `/class-groups/` | Create class |
-| POST | `/courses/` | Create course |
-| POST | `/timeslots/` | Create time slot |
-| POST | `/schedule/generate` | Generate schedule |
-| GET  | `/schedule/grid` | Get schedule grid |
-
----
-
-## ⚠️ Conflict Example
-
-```json
-{
-  "conflicts": [
-    {
-      "course": "Physics",
-      "assigned": 1,
-      "required": 2
-    }
-  ]
-}
-```
-
----
-
-## 🎯 Future Improvements
-
-- Advanced scheduling (backtracking / optimization)
-- Teacher-based timetable view
-- Drag & drop UI
-- Export to PDF / Excel
-- Conflict visualization improvements
-
----
-
-## 👨‍💻 About
-
-This project demonstrates:
-- Constraint-based problem solving
-- Backend-heavy architecture
-- Full-stack development (FastAPI + React)
-
----
-
-## ⭐ Notes
-
-> node_modules, venv, and build files are excluded via `.gitignore`.
-
----
-
-## 📌 Author
-
-Developed by **Emre Doğan**
+Emre Doğan
