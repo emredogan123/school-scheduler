@@ -10,31 +10,16 @@ from app.models.class_group import ClassGroup
 from app.models.teacher import Teacher
 
 router = APIRouter(prefix="/schedule", tags=["Schedule"])
-
 @router.post("/generate")
 def generate(db: Session = Depends(get_db)):
+
+    # 🔥 eski schedule'ı temizle (en önemli fix)
+    db.query(Schedule).delete()
+    db.commit()
+
     result = generate_schedule(db)
     return result
-@router.get("/")
-def get_schedule(db: Session = Depends(get_db)):
-    schedules = db.query(Schedule).all()
 
-    result = []
-
-    for s in schedules:
-        if not (s.course and s.timeslot):
-            continue
-
-        result.append({
-            "course": s.course.name,
-            "teacher": s.course.teacher.name,
-            "class": s.course.class_group.name,
-            "classroom": s.course.class_group.classroom.name,
-            "day": s.timeslot.day,
-            "hour": s.timeslot.hour
-        })
-
-    return result
 
 @router.get("/grid")
 def get_schedule_grid(db: Session = Depends(get_db)):
@@ -57,7 +42,7 @@ def get_schedule_grid(db: Session = Depends(get_db)):
 
     class_names = [c.name for c in classes]
 
-    # GRID
+    # GRID oluştur
     grid = {
         class_name: {
             hour: {day: None for day in days}
@@ -66,18 +51,34 @@ def get_schedule_grid(db: Session = Depends(get_db)):
         for class_name in class_names
     }
 
-    # Fill grid
+    # 🔥 SAFE FILL (CRASH ENGELLEYEN KISIM)
     for s in schedules:
 
         if not (s.course and s.timeslot):
             continue
 
-        class_name = s.course.class_group.name
+        if not (s.course.class_group and s.course.teacher):
+            continue
 
-        grid[class_name][s.timeslot.hour][s.timeslot.day] = {
+        class_name = s.course.class_group.name
+        hour = s.timeslot.hour
+        day = s.timeslot.day
+
+        # 🔥 KEY CHECK (EN KRİTİK)
+        if (
+            class_name not in grid
+            or hour not in grid[class_name]
+            or day not in grid[class_name][hour]
+        ):
+            continue
+
+        grid[class_name][hour][day] = {
             "course": s.course.name,
             "teacher": s.course.teacher.name,
-            "classroom": s.course.class_group.classroom.name
+            "classroom": (
+                s.course.class_group.classroom.name
+                if s.course.class_group.classroom else None
+            )
         }
 
     return {
