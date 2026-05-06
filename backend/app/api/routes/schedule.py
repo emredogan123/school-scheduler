@@ -37,7 +37,7 @@ def get_schedule_grid(db: Session = Depends(get_db)):
 
     hours = sorted(
         list(set(ts.hour for ts in timeslots)),
-        key=lambda h: int(h.split(":")[0])
+        key=lambda h: int(h.replace(".", ":").split(":")[0])
     )
 
     class_names = [c.name for c in classes]
